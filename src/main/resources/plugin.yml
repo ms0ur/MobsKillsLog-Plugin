@@ -1,0 +1,12 @@
+name: MobsKillsLog
+version: '${version}'
+main: xyz.survsmc.ms0ur.mobskillslog.MobsKillsLog
+api-version: 1.18
+authors: [ ms0ur ]
+description: soon
+commands:
+  mobskills:
+    description: Cheks killed mobs.
+    usage: /<command>
+depend:
+  - RedLib
