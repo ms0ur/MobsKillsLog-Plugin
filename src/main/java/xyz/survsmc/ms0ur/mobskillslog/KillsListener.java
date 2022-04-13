@@ -8,28 +8,24 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.jetbrains.annotations.NotNull;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Objects;
+
+import static org.bukkit.Bukkit.getName;
 
 
 public class KillsListener implements Listener {
     @EventHandler
     public void kill(@NotNull EntityDeathEvent event) {
-        if (event.getEntity().getKiller() != null) {
-            Player killer = event.getEntity().getKiller();
-            Entity vistim = event.getEntity();
+        if (event.getEntity().getKiller() != null && !(event.getEntity() instanceof Player)) {
+            String killer = event.getEntity().getKiller().getName();
+            String vistim = event.getEntity().getType().toString();
             Location coords = event.getEntity().getLocation();
             double coordsx = coords.getX();
             double coordsy = coords.getY();
             double coordsz = coords.getZ();
-            Sql.sqliteNewKill(Date(), killer.getName(), vistim.getName(), coordsx, coordsy, coordsz);
+            bd.newKill(killer, vistim, coordsx, coordsy, coordsz);
         }
 
-    }
-    private String Date(){
-        Date dateNow = new Date();
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("E yyyy.MM.dd '; time:' hh:mm:ss a zzz");
-        return ("Date: " + formatForDateNow.format(dateNow));
     }
 
 

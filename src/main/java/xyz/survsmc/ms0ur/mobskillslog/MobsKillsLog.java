@@ -37,7 +37,7 @@ public final class MobsKillsLog extends JavaPlugin {
             plugin.getServer().getPluginManager().disablePlugin(this);
         }
         this.getLogger().info("Init SQLite...");
-        Sql.sqliteCreate();
+        bd.createConnection();
         this.getLogger().info("init command&events...");
         Objects.requireNonNull(getCommand("mobskills")).setExecutor(new MobsKillsCommand());
         Bukkit.getServer().getPluginManager().registerEvents(new KillsListener(), this);
